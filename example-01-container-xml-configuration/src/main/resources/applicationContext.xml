@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+>
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <!-- It is allowed to use both id and name attributes to give name(-s) to a bean -->
+    <!-- Here the port is injected from the properties file into constructor argument -->
+    <bean
+        id="service"
+        class="Service"
+    >
+        <constructor-arg name="port" value="${server.port}" />
+    </bean>
+
+    <!-- Here the service is injected via a setter -->
+    <bean
+        name="controller"
+        class="Controller"
+        scope="prototype"
+    >
+        <property name="service" ref="service" />
+    </bean>
+</beans>
