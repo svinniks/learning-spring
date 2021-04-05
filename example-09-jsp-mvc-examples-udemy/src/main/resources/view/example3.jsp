@@ -1,0 +1,1 @@
+<img src="${pageContext.request.contextPath}/assets/img/demotivator.jpg" />
